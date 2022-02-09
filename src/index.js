@@ -38,8 +38,38 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    let arr = expr.split(/(.{10})/).filter(O=>O)
+    let res = []
+    const result = [];
+    arr.forEach((item,index) => {
+      let arr2 = item.split(/(.{2})/).filter(O=>O)
+       if (item =="**********") res.push(' ')
+       else {
+         let arr3 = arr2.map((item, index) => {
+           if (item=== '10') return '.'
+           if (item==='11') return '-'
+         }) 
+         res.push(arr3.join(''))
+       }   
+     })
+       const findValues = (obj, expectedKey) => {
+         const entries = Object.entries(obj);
+           for (const [key, value] of entries) {
+             if (key === expectedKey) {
+             result.push(value);
+           }
+         }
+       };
+     
+       res.map(item => {
+         if (item === ' ') result.push (' ')
+         else findValues(MORSE_TABLE, item)})
+ 
+    //    console.log(res)
+    //    console.log(result.join(''))
+    return result.join('')
+  
+ }
 
 module.exports = {
     decode
